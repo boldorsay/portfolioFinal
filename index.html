@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="preload"
+      href="/fonts/Riforma/RiformaRegular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <link
+      rel="preload"
+      href="/fonts/Riforma/RiformaBlod.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="fonts/Unica/Unica_77LL-Black.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <!-- import css -->
+    <title>Vite App</title>
+    <audio id="clickSound" preload="auto">
+      <source src="Sound/lock.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+  </head>
+  <body>
+    <div class="parent">
+      <div class="div1">
+        <div id="About" class="projectMeun">
+          <h3>Paul Dorsaz</h3>
+          <p>Interactive media designer</p>
+        </div>
+        <div id="project-container"></div>
+      </div>
+      <div class="div2">
+        <h1 id="titreProjectMenu">  </h1>
+        <div class="flex-container">
+          <div class="flex-items" id="Credit">
+            <p>©</p>
+          </div>
+          <div class="flex-items" id="info">
+            <p>?</p>
+          </div>
+          <div class="flex-items" id="redirection">
+            <p>↗</p>
+          </div>
+        </div>
+      </div>
+      <div class="div3">
+        <div id="containerDvd">
+        <div id="dvd">
+          <img src="public/img/Home/global.jpg" alt="Description">
+        </div> 
+      </div>
+        <div class="imagesWork"></div>
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <!-- Slides will be added here dynamically using JavaScript -->
+          </div>
+          <!-- Add Pagination -->
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </div>
+
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

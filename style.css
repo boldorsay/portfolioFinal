@@ -1,0 +1,660 @@
+:root {
+  --widthBorder: 2.3px;
+  --colorPadlock: #fff;
+  --control: 75px
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  font-family: 'RiformaBlod', Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.scarfCSS {
+  display: flex;
+  /* Utilisez Flexbox */
+  align-items: center;
+  justify-content: center;
+  /* Centre l'élément horizontalement */
+
+}
+
+.scarfCSS img {
+  margin-top: 30%;
+  height: 20% !important;
+  /* Inversion des couleurs de l'image */
+
+
+}
+
+
+.parent {
+  display: grid;
+
+  grid-template-columns: repeat(6, 0.5fr);
+  grid-template-rows: repeat(6, 0.1fr);
+
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+
+
+
+/* make all  full width */
+.parent>div {
+  min-width: 100%;
+}
+
+.div1 {
+  grid-area: 1 / 1 / 12 / 3;
+  z-index: 11;
+  /* background-color: aqua; */
+  outline: var(--widthBorder) solid black;
+  background-color: #fff;
+  overflow: scroll;
+
+
+}
+
+
+
+.projectMeun {
+  width: 100%;
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: 0.6fr 4fr 3fr 1.3fr 0.7fr 0.1fr 0.2fr;
+  cursor: pointer;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  transition: padding 0.1s ease 0s;
+  color: black;
+  background-color: white;
+}
+
+.LockProject {
+  text-align: center;
+  padding-left: 40%;
+}
+
+.hoverMeun {
+  background-color: black !important;
+  color: white !important;
+}
+
+.projectMeun p {
+  margin: 0;
+}
+
+.div2 {
+  grid-area: 1 / 3 / 1 / 7;
+  z-index: 11;
+  text-align: center;
+  position: relative;
+  transform: translateY(-100%);
+  animation: slideDown 1s forwards;
+  /* background-color: blue; */
+  border-left: 2px solid black;
+  /* Adjust the border as needed */
+
+}
+
+
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+#titreProjectMenu {
+  margin: 4px;
+  font-size: 55px;
+  min-height: 68px;
+}
+
+.flex-container {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+  min-height: 31px;
+  min-width: 100%;
+  background-color: #fff;
+}
+
+.flex-items p {
+  margin: 0;
+}
+
+.hoverDiv {
+  position: absolute;
+  width: 100%;
+
+  text-align: left;
+  min-height: 100vh;
+  /* bottom: 0; */
+
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  /* Adjust the RGBA values as needed */
+
+  /* Apply the blur effect */
+  padding: 10px -500px 10px 10px !important;
+
+  backdrop-filter: blur(10px) !important;
+  /* Adjust the blur radius as needed */
+  /* Adjust the blur radius as needed */
+
+}
+
+.hoverTitre {
+  margin-top: 0;
+  padding: 3px 10px;
+  max-width: 650px;
+  font-size: 16px
+}
+
+
+.flex-items {
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
+  width: 33.3333%;
+  border: var(--widthBorder) solid black;
+  border-left: none;
+  font-family: 'Unica 77 LL';
+  font-weight: 900;
+  font-style: normal;
+
+
+
+}
+
+
+.flex-items:nth-child(1) {
+  /* border-left: var(--widthBorder) solid black; */
+
+
+}
+
+
+
+
+
+.flex-items:nth-child(3) {}
+
+.div3 {
+  position: relative;
+
+  grid-area: 2 / 3 / 12 / 13;
+  z-index: 1;
+  border: var(--widthBorder) solid black;
+  border-top: none;
+
+
+}
+
+#containerDvd {
+  position: relative;
+  min-width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+#dvd {
+  position: absolute;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  width: 300px;
+  height: 300px;
+  z-index: 10001;
+  display: inline-block;
+  /* Or another suitable display type */
+
+}
+
+#dvd img {
+  width: auto;
+  /* Adjust as needed */
+  height: auto;
+  /* Adjust as needed */
+  max-width: 100%;
+  /* Adjust as needed */
+}
+
+
+.swiper-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin-top: 5%s;
+}
+
+.swiper-slide {
+  cursor: e-resize;
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* padding-top: 3%; */
+  /* Adjust the padding value as needed */
+  padding-bottom: -50%;
+
+  /* Adjust the padding value as needed */
+}
+
+
+
+
+.swiper-slide img {
+  width: 100%;
+  /* Make the image take the full width of the slide */
+  height: 100%;
+  /* Make the image take the full height of the slide */
+  object-fit: cover;
+  /* Resize the image to cover the whole slide */
+  object-position: center;
+  /* Center the image within the slide */
+}
+
+.scrafCSS img {
+  width: 70% !important;
+  height: center !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: auto !important;
+}
+
+iframe {
+  min-height: 100%;
+  min-width: 100%;
+}
+
+
+
+
+.swiper-slide iframe {
+  min-width: 100%;
+  object-fit: contain;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.swiper-container {
+  position: absolute;
+  /* bottom: 10px; */
+  /* Ajustez selon vos besoins */
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.swiper-pagination {
+  text-align: left;
+}
+
+.swiper-pagination-bullet {
+  width: 0 !important;
+  height: 0 !important;
+  font-size: 60px;
+  margin-left: 40px !important;
+}
+
+.swiper-pagination-bullet {
+  text-decoration: none !important;
+}
+
+.video-overlay {
+  background: rgba(0, 0, 0, 0);
+  /* Overlay semi-transparent */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-overlay::before {
+  /* Un simple icône de lecture, vous pouvez utiliser une image ou un SVG à la place */
+  font-size: 2em;
+  color: white;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: e-resize;
+}
+
+.slide-text-container {
+  position: relative;
+  width: 100%;
+
+  text-align: left;
+  min-height: 100vh;
+  bottom: 0;
+
+  /* Adjust the RGBA values as needed */
+
+  /* Apply the blur effect */
+  padding: 10px -500px 10px 10px !important;
+
+  backdrop-filter: blur(10px);
+  /* Adjust the blur radius as needed */
+  /* Adjust the blur radius as needed */
+
+}
+
+.slide-text {
+  font-weight: 400.hoverMeun;
+  margin-top: 0;
+  padding: 10px 10px;
+  max-width: 550px;
+
+
+
+}
+
+/* ////////////// Padlock/////////////////////// */
+.btn-lock {
+  z-index: 1000;
+  text-align: center;
+  padding-left: 2%;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-lock svg {
+  fill: none;
+  transform: translate3d(0, 0, 0);
+}
+
+.btn-lock svg .bling {
+  stroke: var(--colorPadlock);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 3;
+  stroke-dashoffset: 15;
+  transition: all 0.3s ease;
+}
+
+.btn-lock svg .lock {
+  stroke: var(--colorPadlock);
+  stroke-width: 4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 36;
+  transition: all 0.4s ease;
+}
+
+.btn-lock svg .lockb {
+  fill: var(--colorPadlock);
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  transform: rotate(8deg);
+  transform-origin: 14px 20px;
+  transition: all 0.2s ease;
+}
+
+
+.btn-lock.checked svg {
+  opacity: 1;
+}
+
+
+.btn-lock.checked svg .bling {
+  animation: bling6132 0.3s linear forwards;
+  animation-delay: 0.2s;
+}
+
+.btn-lock.checked svg .lock {
+  stroke-dasharray: 48;
+  animation: locked 0.3s linear forwards;
+
+}
+
+.btn-lock.checked svg .lockb {
+  transform: rotate(0);
+  transform-origin: 14px 22px;
+}
+
+
+/* YT */
+
+#movie_player>div.ytp-chrome-top.ytp-show-cards-title {
+
+  display: none;
+}
+
+.ytp-chrome-top.ytp-show-cards-title {
+  display: none !important;
+}
+
+
+
+.div1 {
+  margin-top: 6.7rem;
+  color: black;
+  opacity: 1;
+}
+
+.redirectionFalse {
+  color: grey;
+  opacity: 6.9;
+}
+
+@keyframes bling6132 {
+  50% {
+    stroke-dasharray: 3;
+    stroke-dashoffset: 12;
+  }
+
+  100% {
+    stroke-dasharray: 3;
+    stroke-dashoffset: 9;
+  }
+}
+
+@keyframes locked {
+  50% {
+    transform: translateY(1px);
+  }
+}
+
+/* --------- Loader--------- */
+
+/* Ajoutez ce CSS dans votre fichier de style */
+.loader {
+  height: calc(var(--control) / 2.2);
+  width: var(--control);
+  border: calc(var(--control) / 20) solid #000;
+  border-width: calc(var(--control) / 20) calc(var(--control) / 20) calc(var(--control) * .65) calc(var(--control) / 20);
+  border-radius: 50%;
+  position: relative;
+  animation: fr 1.8s linear infinite;
+  display: inline-block;
+}
+
+.loader:before,
+.loader:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  height: calc(var(--control) / 10);
+  width: calc(var(--control) / 10);
+
+}
+
+.loader:before {
+  left: 50%;
+  border: calc(var(--control) / 5) solid #fff;
+  background: #000;
+  border-radius: 50%;
+  box-sizing: content-box;
+}
+
+.loader:after {
+  right: 50%;
+  border: calc(var(--control) / 5) solid #000;
+  background: #fff;
+  border-radius: 50%;
+  box-sizing: content-box;
+}
+
+@keyframes fr {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ------- Toogle sound ------- */
+
+.sound-toggle-button {
+  position: absolute;
+  bottom: 100px;
+  right: 10px;
+  padding: 5px, 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: move;
+  z-index: 99;
+}
+
+
+.full-screen-message {
+  font-family: 'RiformaBlod', Helvetica, Arial, sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(10px);
+  /* For Safari */
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 1000;
+  color: white;
+  font-size: 10vw;
+
+}
+
+
+#About {
+  min-width: 31.34vw !important;
+  min-height: 6.16rem !important;
+  max-width: 31.34vw !important;
+  max-height: 6.16rem !important;
+  z-index: 200 !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  text-align: left !important;
+  padding-left: 2vw !important;
+  background-color: #fff;
+  width: 100%;
+  cursor: pointer;
+  padding: 0.2rem 0;
+  color: black;
+  background-color: white;
+  text-decoration: none;
+  display: block !important;
+  border-bottom: var(--widthBorder) black solid;
+}
+
+
+#About h3 {
+  font-size: 55px !important;
+  margin: 0 !important;
+  /* margin-bottom: 0.rem; */
+  margin-top: 3px !important;
+}
+
+#About p {
+  margin: 0px !important;
+  font-size: 20px !important;
+}
+
+
+/* make media queries at less 1000 px  */
+@media only screen and (max-width: 1100px) {
+  #About {
+    min-width: 31.34vw !important;
+    min-height: 6.17rem !important;
+    max-width: 31.34vw !important;
+    max-height: 6.14rem !important;
+  }
+
+  #About h3 {
+    font-size: 40px !important;
+    margin: 0 !important;
+    /* margin-bottom: 0.rem; */
+    margin-top: 20px !important;
+  }
+
+  #About p {
+    margin: 0px !important;
+    margin-top: 8px !important;
+
+    font-size: 18px !important;
+  }
+
+}
+
+
+.swiper-slide img {
+  min-width: 100%;
+  object-fit: contain;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.scarfCSS {
+  display: flex;
+  /* Utilisez Flexbox */
+  align-items: center;
+  justify-content: center;
+  /* Centre l'élément horizontalement */
+
+}
+
+.scarfCSS img {
+  margin-top: 30%;
+  height: 20% !important;
+  /* Inversion des couleurs de l'image */
+
+
+}
