@@ -1,18 +1,18 @@
  let box = document.getElementById('dvd');
  let imageUrls = [
-    'public/img/Home/chacho.jpg',
-    'public/img/Home/etg.jpg',
-    'public/img/Home/fabio.jpg',
-    'public/img/Home/gav.jpg',
-    'public/img/Home/global.jpg',
-    'public/img/Home/hir.jpg',
-    'public/img/Home/hir2.jpg',
-    'public/img/Home/LHC.jpg',
-    'public/img/Home/slav1.jpg',
-    'public/img/Home/slav2.jpg',
-    'public/img/Home/sphere.jpg',
-    'public/img/Home/timer.jpg',
-    'public/img/Home/wejdance.jpg',
+    './public/img/Home/chacho.jpg',
+    './public/img/Home/etg.jpg',
+    './public/img/Home/fabio.jpg',
+    './public/img/Home/gav.jpg',
+    './public/img/Home/global.jpg',
+    './public/img/Home/hir.jpg',
+    './public/img/Home/hir2.jpg',
+    './public/img/Home/LHC.jpg',
+    './public/img/Home/slav1.jpg',
+    './public/img/Home/slav2.jpg',
+    './public/img/Home/sphere.jpg',
+    './public/img/Home/timer.jpg',
+    './public/img/Home/wejdance.jpg',
     // ... more image URLs ...
   ];
 
