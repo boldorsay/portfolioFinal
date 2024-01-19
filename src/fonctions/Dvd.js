@@ -1,19 +1,18 @@
  let box = document.getElementById('dvd');
  let imageUrls = [
-    'img/Home/chacho.jpg',
-    'img/Home/etg.jpg',
-    'img/Home/fabio.jpg',
-    'img/Home/gav.jpg',
-    'img/Home/global.jpg',
-    'img/Home/hir.jpg',
-    'img/Home/hir2.jpg',
-    'img/Home/LHC.jpg',
-    'img/Home/slav1.jpg',
-    'img/Home/slav2.jpg',
-    'img/Home/sphere.jpg',
-    'img/Home/timer.jpg',
-    'img/Home/wejdance.jpg',
-    // ... more image URLs ...
+    './img/Home/chacho.jpg',
+    './img/Home/etg.jpg',
+    './img/Home/fabio.jpg',
+    './img/Home/gav.jpg',
+    './img/Home/global.jpg',
+    './img/Home/hir.jpg',
+    './img/Home/hir2.jpg',
+    './img/Home/LHC.jpg',
+    './img/Home/slav1.jpg',
+    './img/Home/slav2.jpg',
+    './img/Home/sphere.jpg',
+    './img/Home/timer.jpg',
+    './img/Home/wejdance.jpg',
   ];
 
 let  currentColor = Math.floor((Math.random() * 25) + 1);
