@@ -145,7 +145,7 @@ export let projectJSON = [
     TypeProject: "IA",
     WhereProject: "ECAL",
     dateProject: "2021",
-    Statut: "red",
+    Statut: "white",
     Exception: {
       Fond: "white",
       StyleCSS: "scarfCSS",

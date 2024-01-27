@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Unica 77 LL';
+    src: url('Unica_77LL-Black.woff2') format('woff2'),
+        url('Unica_77LL-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+

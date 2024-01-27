@@ -31,7 +31,7 @@ let  currentColor = Math.floor((Math.random() * 25) + 1);
  let  yMax = win.offsetHeight - boxTop - boxHeight;
  let  request = null;
  let  direction = 'se';
- let  speed = 6;
+ let  speed = 5;
  let  timeout = null;
 
 

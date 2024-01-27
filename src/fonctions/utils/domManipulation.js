@@ -82,7 +82,6 @@ function createSlide(key, url, backgroundColor, specialCondition, project) {
     const img = document.createElement("img");
     img.src = url;
     slide.appendChild(img);
-    console.log(specialCondition + ' lolol');
     if (specialCondition === "scarfCSS") {
       slide.classList.add("scarfCSS");
       console.log("prout");
@@ -130,6 +129,12 @@ function initializeSwiper() {
       renderBullet: (index, className) =>
         `<span class="${className}">${index + 1}</span>`,
     },
+    on: {
+      slideChange: function(swiper) {
+        console.log("dwed");
+        document.querySelector(".div1").style.zIndex = "99";
+      }
+    }
   });
 }
 function loadVideoWithLoader(videoUrl, slideElement, backgroundColor, project) {

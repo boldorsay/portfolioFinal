@@ -11,6 +11,7 @@ export function addEventListenersToDiv1(div1) {
             let projectName = targetDiv.getAttribute('data-project-name');
             stateMachine.dispatch('click', projectName);
         }
+        document.querySelector(".div1").style.zIndex = "99"
     });
 
     div1.addEventListener("mouseover", (event) => {
