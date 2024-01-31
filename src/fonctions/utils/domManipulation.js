@@ -125,14 +125,16 @@ function initializeSwiper() {
   swiper = new Swiper(".swiper-container", {
     loop: true,
     pagination: {
+      clickable: true,
       el: ".swiper-pagination",
       renderBullet: (index, className) =>
         `<span class="${className}">${index + 1}</span>`,
     },
     on: {
       slideChange: function(swiper) {
-        console.log("dwed");
-        document.querySelector(".div1").style.zIndex = "99";
+        let test =  document.querySelector(".div1")
+        test.style.zIndex = "100";
+        console.log(test.style.zIndex);
       }
     }
   });

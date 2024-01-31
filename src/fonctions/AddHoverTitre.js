@@ -57,9 +57,11 @@ function createHoverDiv(item, nameProject) {
       item.addEventListener("click", () => {
         console.log(project.hover.redirection);
         if (link === "") {
+          console.log("cacacacac");
           return;
         }
         window.open(link, "_blank");
+
       });
       break;
     default:

@@ -134,7 +134,7 @@ export let projectJSON = [
     hover: {
       Credit: ["ECAL", "Gael Hugo"],
       info: "Wejdance is an interactive web platform that invites you to channel your emotions through storytelling and digital art. It begins with a personal narrative - how would you react if you encountered an ex-partner in a club? This introspective prompt sets the stage for creative expression.<br><br>> After sharing your story, you're guided to craft a visual representation of your emotions using p5.js, creating forms reminiscent of club lasers. These unique creations are then uploaded to the Wejdance platform, where they join a collective gallery of experiences and artistic interpretations.<br><br>This project serves as a digital canvas for emotional release, combining personal storytelling with visual art. It's not just about the individual stories or the laser-like visuals; it's about the shared experience of processing complex emotions in a creative, communal environment.",
-      redirection: "",
+      redirection: "https://philfruits.ch/Wejdance4/",
       titreName: "Wejdance: A Digital Space for Emotional Expression",
     },
   },
@@ -306,7 +306,7 @@ export let projectJSON = [
     hover: {
       Credit: ["ECAL", "Mario Von Rickenbach"],
       info: "This platform game, developed using Unity, invites players into an unusual world, embodying a worm navigating through a stomach. The game's distinct visual appeal lies in its use of the Softbody technique to simulate a fluid, organic appearance.<br><br>      The worm's design is ingeniously crafted from 14 interconnected spheres, each joined by varying degrees of resistance, which contributes to its fluid movement. As it adheres to surfaces within the stomach environment, the player can control its movements using a mouse. This interaction not only guides the worm but also brings light to the otherwise dark surroundings, as the mouse cursor doubles as a virtual lamp.<br><br>            The aesthetic of the game pays homage to the classic era of Flash play, blending nostalgia with modern gaming technology. This project is an exploration of physics in game design, offering a unique experience that combines creative visuals with engaging gameplay.",
-      redirection: "www.philfruits.ch/export",
+      redirection: "https://philfruits.ch/export",
       titreName: "Worm in the Stomach: A Unity-Based Platform Game",
     },
   },

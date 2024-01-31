@@ -21,6 +21,10 @@ export function addEventListenersToDiv1(div1) {
             let projectName = targetDiv.getAttribute('data-project-name');
             stateMachine.dispatch('mouseover', projectName);
         }
+        document.getElementById("Credit").style.color = "black"
+        document.getElementById("info").style.color = "black"
+
+
     });
 
     div1.addEventListener("mouseout", (event) => {
@@ -37,6 +41,11 @@ export function addEventListenersToDiv1(div1) {
         
             document.getElementById("containerDvd").style.display = "block";
             document.getElementById("titreProjectMenu").innerText = " "
+            document.getElementById("Credit").style.color = "#dededd"
+            document.getElementById("info").style.color = "#dededd"
+            let redirectionP = document.getElementById("redirection").children[0];
+            redirectionP.classList.remove("redirectionTrue");
+            redirectionP.classList.add("redirectionFalse");
         }
     });
 }
