@@ -53,7 +53,6 @@ export function addContentWork(projectName) {
     const backgroundColor = project.Exception.Fond;
     //Bad code, change the scarf css
     const specialCondition = project.Exception.StyleCSS;
-    console.log(specialCondition);
     const slide = createSlide(
       key,
       contentItem,
@@ -84,7 +83,6 @@ function createSlide(key, url, backgroundColor, specialCondition, project) {
     slide.appendChild(img);
     if (specialCondition === "scarfCSS") {
       slide.classList.add("scarfCSS");
-      console.log("prout");
     }
   } else if (key.startsWith("video")) {
     loadVideoWithLoader(url, slide, backgroundColor, project);
@@ -134,7 +132,6 @@ function initializeSwiper() {
       slideChange: function(swiper) {
         let test =  document.querySelector(".div1")
         test.style.zIndex = "100";
-        console.log(test.style.zIndex);
       }
     }
   });
