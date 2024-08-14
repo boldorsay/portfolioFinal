@@ -118,222 +118,6 @@ body {
 }
 
 
-.parent>*:nth-child(1) {
-  -ms-grid-row: 1;
-  -ms-grid-column: 1;
-}
-
-
-.parent>*:nth-child(2) {
-  -ms-grid-row: 1;
-  -ms-grid-column: 3;
-}
-
-
-.parent>*:nth-child(3) {
-  -ms-grid-row: 1;
-  -ms-grid-column: 5;
-}
-
-
-.parent>*:nth-child(4) {
-  -ms-grid-row: 1;
-  -ms-grid-column: 7;
-}
-
-
-.parent>*:nth-child(5) {
-  -ms-grid-row: 1;
-  -ms-grid-column: 9;
-}
-
-
-.parent>*:nth-child(6) {
-  -ms-grid-row: 1;
-  -ms-grid-column: 11;
-}
-
-
-.parent>*:nth-child(7) {
-  -ms-grid-row: 3;
-  -ms-grid-column: 1;
-}
-
-
-.parent>*:nth-child(8) {
-  -ms-grid-row: 3;
-  -ms-grid-column: 3;
-}
-
-
-.parent>*:nth-child(9) {
-  -ms-grid-row: 3;
-  -ms-grid-column: 5;
-}
-
-
-.parent>*:nth-child(10) {
-  -ms-grid-row: 3;
-  -ms-grid-column: 7;
-}
-
-
-.parent>*:nth-child(11) {
-  -ms-grid-row: 3;
-  -ms-grid-column: 9;
-}
-
-
-.parent>*:nth-child(12) {
-  -ms-grid-row: 3;
-  -ms-grid-column: 11;
-}
-
-
-.parent>*:nth-child(13) {
-  -ms-grid-row: 5;
-  -ms-grid-column: 1;
-}
-
-
-.parent>*:nth-child(14) {
-  -ms-grid-row: 5;
-  -ms-grid-column: 3;
-}
-
-
-.parent>*:nth-child(15) {
-  -ms-grid-row: 5;
-  -ms-grid-column: 5;
-}
-
-
-.parent>*:nth-child(16) {
-  -ms-grid-row: 5;
-  -ms-grid-column: 7;
-}
-
-
-.parent>*:nth-child(17) {
-  -ms-grid-row: 5;
-  -ms-grid-column: 9;
-}
-
-
-.parent>*:nth-child(18) {
-  -ms-grid-row: 5;
-  -ms-grid-column: 11;
-}
-
-
-.parent>*:nth-child(19) {
-  -ms-grid-row: 7;
-  -ms-grid-column: 1;
-}
-
-
-.parent>*:nth-child(20) {
-  -ms-grid-row: 7;
-  -ms-grid-column: 3;
-}
-
-
-.parent>*:nth-child(21) {
-  -ms-grid-row: 7;
-  -ms-grid-column: 5;
-}
-
-
-.parent>*:nth-child(22) {
-  -ms-grid-row: 7;
-  -ms-grid-column: 7;
-}
-
-
-.parent>*:nth-child(23) {
-  -ms-grid-row: 7;
-  -ms-grid-column: 9;
-}
-
-
-.parent>*:nth-child(24) {
-  -ms-grid-row: 7;
-  -ms-grid-column: 11;
-}
-
-
-.parent>*:nth-child(25) {
-  -ms-grid-row: 9;
-  -ms-grid-column: 1;
-}
-
-
-.parent>*:nth-child(26) {
-  -ms-grid-row: 9;
-  -ms-grid-column: 3;
-}
-
-
-.parent>*:nth-child(27) {
-  -ms-grid-row: 9;
-  -ms-grid-column: 5;
-}
-
-
-.parent>*:nth-child(28) {
-  -ms-grid-row: 9;
-  -ms-grid-column: 7;
-}
-
-
-.parent>*:nth-child(29) {
-  -ms-grid-row: 9;
-  -ms-grid-column: 9;
-}
-
-
-.parent>*:nth-child(30) {
-  -ms-grid-row: 9;
-  -ms-grid-column: 11;
-}
-
-
-.parent>*:nth-child(31) {
-  -ms-grid-row: 11;
-  -ms-grid-column: 1;
-}
-
-
-.parent>*:nth-child(32) {
-  -ms-grid-row: 11;
-  -ms-grid-column: 3;
-}
-
-
-.parent>*:nth-child(33) {
-  -ms-grid-row: 11;
-  -ms-grid-column: 5;
-}
-
-
-.parent>*:nth-child(34) {
-  -ms-grid-row: 11;
-  -ms-grid-column: 7;
-}
-
-
-.parent>*:nth-child(35) {
-  -ms-grid-row: 11;
-  -ms-grid-column: 9;
-}
-
-
-.parent>*:nth-child(36) {
-  -ms-grid-row: 11;
-  -ms-grid-column: 11;
-}
-
-
 
 
 /* make all  full width */
@@ -1005,17 +789,17 @@ iframe {
   z-index: 99;
 }
 
+/* 
 
 .full-screen-message {
   font-family: 'RiformaBlod', Helvetica, Arial, sans-serif;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100%;≠``
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-backdrop-filter: blur(10px);
-  /* For Safari */
   backdrop-filter: blur(10px);
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1031,7 +815,7 @@ iframe {
   color: white;
   font-size: 10vw;
 
-}
+} */
 
 
 #About {
@@ -1051,7 +835,7 @@ iframe {
   color: black;
   background-color: white;
   text-decoration: none;
-  display: block !important;
+  display: block;
   border-bottom: var(--widthBorder) black solid;
 }
 
@@ -1130,4 +914,37 @@ iframe {
   /* Inversion des couleurs de l'image */
 
 
+}
+
+@media (max-width: 768px) {
+  .parent {
+    grid-template-columns: 1fr;
+    grid-template-rows: 50vh 50vh;
+    /* Each div takes half of the viewport height */
+    height: 100vh;
+    /* Ensure the parent takes the full height of the screen */
+  }
+
+  .div1 {
+    grid-area: 1 / 1 / 2 / 2;
+    margin-top: 0;
+    /* Remove the margin-top */
+    overflow-y: auto;
+    /* Ensure content is scrollable if it overflows */
+  }
+
+  .div2 {
+    display: none;
+    /* Hide div2 as per your original request */
+  }
+
+  .div3 {
+    grid-area: 2 / 1 / 3 / 2;
+    overflow-y: auto;
+    /* Ensure content is scrollable if it overflows */
+  }
+
+  #About {
+    min-width: 100% !important;
+  }
 }
