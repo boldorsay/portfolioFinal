@@ -2,7 +2,15 @@ import "./style.css";
 import { PopulateNumbers, projectJSON } from "./src/JSON/ProjectsJSON.js";
 
 import "swiper/swiper-bundle.css";
-import { addEventListenersToDiv1, initializeStatesForDiv1 } from "./src/fonctions/AddEventListenersToDiv1";
+import {
+  addEventListenersToDiv1,
+  initializeStatesForDiv1,
+  stateMachine,
+} from "./src/fonctions/AddEventListenersToDiv1";
+import {
+  applyDeepLinkIfPresent,
+  initDeepLinkSyncMode,
+} from "./src/fonctions/deepLink.js";
 import { dvd } from "./src/fonctions/Dvd";
 import { GenerateProjectListe } from "./src/fonctions/GenerateProjectListe";
 
@@ -18,9 +26,11 @@ window.onload = async () => {
   await PopulateNumbers(); // Utilisez la fonction populateNumbers définie plus tôt
   const htmlCode = GenerateProjectListe(projectJSON);
   let div1 = document.querySelector('.div1')
-  initializeStatesForDiv1(div1)
-  addEventListenersToDiv1(div1)
-  dvd()
+  initializeStatesForDiv1(div1);
+  addEventListenersToDiv1(div1);
+  initDeepLinkSyncMode();
+  applyDeepLinkIfPresent(stateMachine);
+  dvd();
 };
  
 

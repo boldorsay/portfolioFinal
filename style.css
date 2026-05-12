@@ -61,7 +61,10 @@
 :root {
   --widthBorder: 2.3px;
   --colorPadlock: #fff;
-  --control: 75px
+  --control: 75px;
+  /* Bandeau titre gauche / droite : px pour coller au trait (pas d’arrondi rem) */
+  --div2-title-margin-block: 4px;
+  --div2-title-min-height: 68px;
 }
 
 html,
@@ -125,6 +128,13 @@ body {
   min-width: 100%;
 }
 
+/* Sinon .div1 veut faire au moins 100 % du parent et ne respecte plus
+   la largeur des 2 colonnes de grille — le bandeau About ne peut pas
+   « épouser » la colonne. */
+.parent > .div1 {
+  min-width: 0;
+}
+
 .div1 {
   -ms-grid-row: 1;
   -ms-grid-row-span: 11;
@@ -132,12 +142,35 @@ body {
   -ms-grid-column-span: 2;
   grid-area: 1 / 1 / 12 / 3;
   z-index: 100;
-  /* background-color: aqua; */
-  outline: var(--widthBorder) solid black;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  /* Bordures intérieures (sauf à droite) : une seule ligne avec .div2 — évite outline + border-left doublés / décalage sub-pixel */
+  outline: none;
+  border-top: var(--widthBorder) solid #000;
+  border-left: var(--widthBorder) solid #000;
+  border-bottom: var(--widthBorder) solid #000;
+  border-right: none;
   background-color: #fff;
   overflow: scroll;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
 
-
+#project-container {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 
@@ -169,6 +202,18 @@ body {
   color: white !important;
 }
 
+/* #About a un fond blanc plus spécifique : forcer le bandeau entièrement noir au survol */
+#About.hoverMeun {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-bottom-color: #000 !important;
+}
+
+#About.hoverMeun h3,
+#About.hoverMeun p {
+  color: #fff !important;
+}
+
 .projectMeun p {
   margin: 0;
 }
@@ -181,13 +226,24 @@ body {
   z-index: 100;
   text-align: center;
   position: relative;
-  -webkit-transform: translateY(-100%);
-  -ms-transform: translateY(-100%);
-  transform: translateY(-100%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  gap: 0;
+  -webkit-transform: translate3d(0, -100%, 0);
+  -ms-transform: translate3d(0, -100%, 0);
+  transform: translate3d(0, -100%, 0);
   -webkit-animation: slideDown 1s forwards;
   animation: slideDown 1s forwards;
   /* background-color: blue; */
-  border-left: 2px solid black;
+  border-left: var(--widthBorder) solid black;
   /* Adjust the border as needed */
 
 }
@@ -196,13 +252,13 @@ body {
 
 @-webkit-keyframes slideDown {
   0% {
-    -webkit-transform: translateY(-100%);
-    transform: translateY(-100%);
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
   }
 
   100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -210,26 +266,33 @@ body {
 
 @keyframes slideDown {
   0% {
-    -webkit-transform: translateY(-100%);
-    transform: translateY(-100%);
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
   }
 
   100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 #titreProjectMenu {
-  margin: 4px;
+  margin: var(--div2-title-margin-block) var(--div2-title-margin-block) 0
+    var(--div2-title-margin-block);
   font-size: 55px;
-  min-height: 68px;
+  height: var(--div2-title-min-height);
+  min-height: var(--div2-title-min-height);
+  max-height: var(--div2-title-min-height);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: 1.05;
+  overflow: hidden;
 }
 
 .flex-container {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
@@ -245,8 +308,12 @@ body {
   -ms-flex-line-pack: stretch;
   align-content: stretch;
   min-height: 31px;
+  width: 100%;
   min-width: 100%;
   background-color: #fff;
+  gap: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .flex-items p {
@@ -258,32 +325,64 @@ body {
 
 
 .hoverDiv {
+  /* Couvre tout .div3 (sous la barre © ? ↗ qui est dans .div2), flou sur tout le média */
   position: absolute;
+  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
+  height: 100%;
+  max-height: none;
+  min-height: 0;
+  margin-top: 0;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: clamp(1rem, 3vh, 2rem) clamp(1rem, 3vw, 2rem);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: rgba(255, 255, 255, 0.52);
+  -webkit-backdrop-filter: blur(16px) saturate(1.05);
+  backdrop-filter: blur(16px) saturate(1.05);
+  border-top: none;
+  z-index: 110;
+  pointer-events: auto;
+}
 
-  text-align: left;
-  min-height: 100vh;
-  /* bottom: 0; */
+.hoverDiv .hoverDiv__title {
+  font-size: clamp(1.15rem, 2.2vw, 1.65rem);
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+}
 
-  background-color: rgba(255, 255, 255, 0.6) !important;
-  /* Adjust the RGBA values as needed */
-
-  /* Apply the blur effect */
-  padding: 10px -500px 10px 10px !important;
-
-  -webkit-backdrop-filter: blur(10px) !important;
-
-  backdrop-filter: blur(10px) !important;
-  /* Adjust the blur radius as needed */
-  /* Adjust the blur radius as needed */
-
+.hoverDiv .hoverTitre {
+  max-width: 38rem;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .hoverTitre {
   margin-top: 0;
-  padding: 3px 10px;
-  max-width: 650px;
-  font-size: 16px
+  padding: 0.35rem 0.75rem;
+  max-width: 38rem;
+  font-size: 16px;
 }
 
 
@@ -341,15 +440,30 @@ body {
   z-index: 1;
   border: var(--widthBorder) solid black;
   border-top: none;
-
-
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-height: 0;
+  isolation: isolate;
 }
 
 #containerDvd {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
   min-width: 100%;
-  min-height: 100%;
+  min-height: 0;
   overflow: hidden;
+  z-index: 50;
+  /* Hors flux flex : ne pousse plus le Swiper — évite le grand vide sous le menu */
 }
 
 #dvd {
@@ -373,7 +487,7 @@ body {
   /* Adjust as needed */
 }
 
-root .swiper-slide {
+:root .swiper-slide {
   -webkit-transform: translateZ(0);
   -webkit-backface-visibility: hidden;
 }
@@ -465,13 +579,44 @@ iframe {
 
 }
 
-.swiper-container {
-  position: absolute;
-  /* bottom: 10px; */
-  /* Ajustez selon vos besoins */
+.div3 > .swiper-container {
+  position: relative;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 0 !important;
+  width: 100%;
   left: 0;
   right: 0;
-  margin: auto;
+}
+
+.div3 > .imagesWork {
+  flex: 0 0 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.div3 .swiper-wrapper {
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+.div3 .swiper-slide {
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.div3 .swiper-pagination {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .swiper-pagination {
@@ -521,32 +666,74 @@ iframe {
 .slide-text-container {
   position: relative;
   width: 100%;
-
-  text-align: left;
-  min-height: 100vh;
-  bottom: 0;
-
-  /* Adjust the RGBA values as needed */
-
-  /* Apply the blur effect */
-  padding: 10px -500px 10px 10px !important;
-
+  max-width: 40rem;
+  margin: 0 auto;
+  min-height: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: clamp(1.25rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.55);
   -webkit-backdrop-filter: blur(10px);
-
   backdrop-filter: blur(10px);
-  /* Adjust the blur radius as needed */
-  /* Adjust the blur radius as needed */
+}
 
+.swiper-slide.swiper-slide--text {
+  cursor: default;
+  padding: 0;
+}
+
+.slide-title {
+  font-family: 'RiformaBlod', Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-size: clamp(2rem, 5.5vw, 3.35rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem;
+  max-width: 100%;
 }
 
 .slide-text {
-  font-weight: 400.hoverMeun;
-  margin-top: 0;
-  padding: 10px 10px;
-  max-width: 550px;
+  font-family: 'RiformaBlod', Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-size: clamp(0.95rem, 1.65vw, 1.1rem);
+  line-height: 1.55;
+  text-align: center;
+  max-width: 34rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
 
+.slide-text__lead {
+  margin: 0 0 1.25rem;
+}
 
+.slide-text__block {
+  margin: 0 0 1rem;
+}
 
+.slide-text__link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.slide-text__link:hover {
+  opacity: 0.65;
 }
 
 /* ////////////// Padlock/////////////////////// */
@@ -645,7 +832,8 @@ iframe {
 
 
 .div1 {
-  margin-top: 6.7rem;
+  /* Avant : 6.7rem — laissait un vide en haut de la colonne. */
+  margin-top: 0;
   color: black;
   opacity: 1;
   z-index: 100;
@@ -796,7 +984,7 @@ iframe {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;≠``
+  width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-backdrop-filter: blur(10px);
@@ -818,61 +1006,84 @@ iframe {
 } */
 
 
+/* #About garde .projectMeun pour les événements, mais la grille 7 colonnes
+   ne doit pas s’appliquer : sinon le <h3> tombe dans la colonne « numéro »
+   et recouvre les chiffres des projets.
+   Largeur = celle de .div1 (piste grille), sans vw ni position absolute. */
 #About {
-  min-width: 31.34vw !important;
-  min-height: 6.16rem !important;
-  max-width: 31.34vw !important;
-  max-height: 6.16rem !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  min-width: 0;
+  width: auto;
+  /* Marge haute seulement (alignement avec #titreProjectMenu) — pas de marge latérale pour coller au cadre */
+  margin: var(--div2-title-margin-block) 0 0 0;
+  height: var(--div2-title-min-height);
+  min-height: var(--div2-title-min-height) !important;
+  max-height: var(--div2-title-min-height) !important;
+  position: relative;
   text-align: left !important;
-  padding-left: 2vw !important;
+  padding: 0.2rem 0 0.15rem 0 !important;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
   background-color: #fff;
-  width: 100%;
   cursor: pointer;
-  padding: 0.2rem 0;
   color: black;
-  background-color: white;
   text-decoration: none;
-  display: block;
   border-bottom: var(--widthBorder) black solid;
+  overflow: hidden;
 }
 
 
 #About h3 {
-  font-size: 54px !important;
+  width: 100%;
+  max-width: 100%;
+  font-size: clamp(1.15rem, 2.35vw + 0.45rem, 2.65rem) !important;
+  line-height: 1.05 !important;
   margin: 0 !important;
-  /* margin-bottom: 0.rem; */
-  margin-top: 3px !important;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 #About p {
-  margin: 0px !important;
-  font-size: 20px !important;
+  width: 100%;
+  max-width: 100%;
+  margin: 0.15rem 0 0 !important;
+  font-size: clamp(0.7rem, 0.85vw + 0.42rem, 1.05rem) !important;
+  line-height: 1.2 !important;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 
 /* make media queries at less 1000 px  */
 @media only screen and (max-width: 1100px) {
-  #About {
-    min-width: 31.34vw !important;
-    min-height: 6.17rem !important;
-    max-width: 31.34vw !important;
-    max-height: 6.14rem !important;
+  :root {
+    --div2-title-min-height: 60px;
   }
 
   #About h3 {
-    font-size: 40px !important;
+    font-size: clamp(1.05rem, 2.1vw + 0.4rem, 2.1rem) !important;
     margin: 0 !important;
-    margin-top: 20px !important;
   }
 
   #About p {
-    margin: 0px !important;
-    margin-top: 8px !important;
-
-    font-size: 18px !important;
+    margin: 0.12rem 0 0 !important;
   }
 
 }
@@ -945,6 +1156,9 @@ iframe {
   }
 
   #About {
-    min-width: 100% !important;
+    -ms-flex-item-align: stretch;
+    align-self: stretch;
+    min-width: 0;
+    width: auto;
   }
 }

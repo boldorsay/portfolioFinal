@@ -581,19 +581,19 @@ export let projectJSON = [
     WhereProject: "SOLO ",
     dateProject: "2018",
     Statut: "white",
+    slideTitle: "Paul Nouvelhomme",
     Exception: {
       Fond: "white",
     },
     content: {
-      text: "img/BAPT/BandAPartLogoWeb0.jpg",
-
+      text:
+        '<p class="slide-text__lead">Paul Nouvelhomme is a Swiss media &amp; interaction designer based in Lausanne, graduated from ECAL (2023), working independently at Workshop Studio.</p><p class="slide-text__block"><strong>Education</strong><br>2020 – 2023 Bachelor in Media &amp; Interaction Design — ECAL<br>2018 – 2019 Digital Junior — M&amp;C Saatchi<br>2013 – 2017 ERACOM (CFC)</p><p class="slide-text__block"><strong>Links</strong><br><a class="slide-text__link" href="https://www.instagram.com/paulnouvelhomme/">Instagram</a><br><a class="slide-text__link" href="mailto:dorsazpaul@gmail.com">Mail</a></p>',
     },
     hover: {
       Credit: [""],
       info: " ",
       redirection: " ",
-      titreName:
-        " ",
+      titreName: " ",
     },
   },
   

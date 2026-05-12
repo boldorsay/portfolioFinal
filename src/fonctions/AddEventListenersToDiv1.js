@@ -1,7 +1,7 @@
 import { addHoverTitre } from "./AddHoverTitre";
 import { CheckContentHoverTitre } from "./utils/CheckContentHoverTitre";
 import { addContentWork, changeNameTitreContent, deleteSwiper } from "./utils/domManipulation";
-import { handleDivClick, handleDivMouseOut, handleDivMouseOver } from "./utils/eventHandlers";
+import { setProjectInUrl } from "./deepLink.js";
 
 
 export function addEventListenersToDiv1(div1) {
@@ -10,6 +10,7 @@ export function addEventListenersToDiv1(div1) {
         if (targetDiv) {
             let projectName = targetDiv.getAttribute('data-project-name');
             stateMachine.dispatch('click', projectName);
+            setProjectInUrl(stateMachine.selectedProject);
         }
         document.querySelector(".div1").style.zIndex = "99"
     });
@@ -59,7 +60,7 @@ function getTargetProjectMeun(target) {
     return target;
 }
 
-const stateMachine = {
+export const stateMachine = {
     states: {}, // Stores the states for each div
     selectedProject: null, // To track the currently selected project
     sound :  "clickSound",
@@ -95,7 +96,8 @@ const stateMachine = {
                 this.addHoverEffect(projectName)
                 addContentWork(projectName);
                 changeNameTitreContent(projectName);
-                CheckContentHoverTitre(projectName);            
+                CheckContentHoverTitre(projectName);
+                addHoverTitre(projectName);
             },
             mouseout: function(projectName) {
                 this.removeHoverEffect(projectName)
@@ -155,8 +157,9 @@ const stateMachine = {
                 this.addHoverEffect(projectName)
                 addContentWork(projectName);
                 changeNameTitreContent(projectName);
-                CheckContentHoverTitre(projectName);    
-        
+                CheckContentHoverTitre(projectName);
+                addHoverTitre(projectName);
+
                 // Change the current project to 'clicked'
                 this.changeState(projectName, 'clicked');
         

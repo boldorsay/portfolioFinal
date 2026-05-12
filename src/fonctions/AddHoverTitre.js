@@ -7,58 +7,99 @@ let link = null;
 let text = null;
 let titreName = null;
 
-function onMouseOverHandler(item, nameProject) {
-  removeExistingHoverDiv();
-  const hoverDiv = createHoverDiv(item, nameProject);
-  document.querySelector(".div2").appendChild(hoverDiv);
+function shouldKeepHoverPanel(relatedTarget) {
+  if (!relatedTarget || !(relatedTarget instanceof Element)) {
+    return false;
+  }
+  return Boolean(
+    relatedTarget.closest(".hoverDiv") ||
+      relatedTarget.closest(".flex-items")
+  );
 }
 
-function onMouseOutHandler() {
+function onHoverDivMouseLeave(e) {
+  if (shouldKeepHoverPanel(e.relatedTarget)) {
+    return;
+  }
+  removeExistingHoverDiv();
+}
+
+function onMouseEnterHandler(item, nameProject) {
+  const existing = document.querySelector(".hoverDiv");
+  if (
+    existing &&
+    existing.dataset.projectName === nameProject &&
+    existing.dataset.sourceId === item.id
+  ) {
+    return;
+  }
+  removeExistingHoverDiv();
+  const hoverDiv = createHoverDiv(item, nameProject);
+  if (hoverDiv) {
+    hoverDiv.dataset.projectName = nameProject;
+    hoverDiv.dataset.sourceId = item.id;
+    hoverDiv.addEventListener("mouseleave", onHoverDivMouseLeave);
+    const host = document.querySelector(".div3");
+    if (host) {
+      host.appendChild(hoverDiv);
+    }
+  }
+}
+
+function onMouseLeaveFromFlex(e) {
+  if (shouldKeepHoverPanel(e.relatedTarget)) {
+    return;
+  }
   removeExistingHoverDiv();
 }
 
 export function addHoverTitre(nameProject) {
-  document.querySelectorAll(".flex-items").forEach(function(item) {
-    // Préparer les gestionnaires spécifiques à cet item
-    const mouseOverHandler = () => onMouseOverHandler(item, nameProject);
-    const mouseOutHandler = onMouseOutHandler;
+  const redirectionItem = document.getElementById("redirection");
+  const project = projectJSON.find((p) => p.nameProject === nameProject);
+  if (redirectionItem) {
+    redirectionItem.setAttribute(
+      "data-redirection-url",
+      project?.hover?.redirection ?? ""
+    );
+  }
 
-    // Suppression des écouteurs précédents s'ils existent
+  document.querySelectorAll(".flex-items").forEach(function(item) {
+    const mouseEnterHandler = () => onMouseEnterHandler(item, nameProject);
+    const mouseLeaveHandler = (ev) => onMouseLeaveFromFlex(ev);
+
     if (eventHandlers.has(item)) {
       const handlers = eventHandlers.get(item);
-      item.removeEventListener("mouseover", handlers.mouseOver);
-      item.removeEventListener("mouseout", handlers.mouseOut);
+      item.removeEventListener("mouseenter", handlers.mouseEnter);
+      item.removeEventListener("mouseleave", handlers.mouseLeave);
     }
 
-    // Ajouter les nouveaux écouteurs
-    item.addEventListener("mouseover", mouseOverHandler);
-    item.addEventListener("mouseout", mouseOutHandler);
+    item.addEventListener("mouseenter", mouseEnterHandler);
+    item.addEventListener("mouseleave", mouseLeaveHandler);
 
-    // Mettre à jour la map avec les nouveaux gestionnaires
-    eventHandlers.set(item, { mouseOver: mouseOverHandler, mouseOut: mouseOutHandler });
+    eventHandlers.set(item, {
+      mouseEnter: mouseEnterHandler,
+      mouseLeave: mouseLeaveHandler,
+    });
   });
 }
 
 function removeExistingHoverDiv() {
   const existingHoverDiv = document.querySelector(".hoverDiv");
-  link = null
-  text = null
-  titreName = null
-
-  console.log('1'+link)
+  link = null;
+  text = null;
+  titreName = null;
   if (existingHoverDiv) {
     existingHoverDiv.remove();
-
   }
 }
 function createHoverDiv(item, nameProject) {
   const project = projectJSON.find((p) => p.nameProject === nameProject);
-   link = project.hover.redirection;
-   text = project.hover.info;
-   titreName = project.hover.titreName;
-
-   console.log(link)
-
+  if (!project || !project.hover) {
+    return null;
+  }
+  link = project.hover.redirection;
+  text = project.hover.info;
+  titreName = project.hover.titreName;
 
   const hoverDiv = document.createElement("div");
   hoverDiv.classList.add("hoverDiv");
@@ -68,8 +109,9 @@ function createHoverDiv(item, nameProject) {
   switch (item.id) {
     case "Credit":
       hoverDiv.textContent = "n/a";
-      break;
+      return hoverDiv;
     case "info":
+      titre.classList.add("hoverDiv__title");
       titre.textContent = titreName;
       hoverDiv.appendChild(titre);
 
@@ -77,32 +119,27 @@ function createHoverDiv(item, nameProject) {
       let BaliseP = document.createElement("p");
       BaliseP.classList.add("hoverTitre");
 
-      BaliseP.innerHTML += text;
+      BaliseP.innerHTML = text;
       hoverDiv.appendChild(BaliseP);
 
-      break;
+      return hoverDiv;
     case "redirection":
-  hoverDiv.classList.remove("hoverDiv");
-  // Attachez l'URL directement à l'élément si ce n'est pas déjà fait
-  if (!item.hasAttribute("data-redirection-url")) {
-    item.setAttribute("data-redirection-url", link);
-    item.addEventListener("click", () => {
-      // Récupérer l'URL de redirection depuis l'attribut de l'élément
-      const redirectionUrl = link
-      console.log(redirectionUrl);
-      if (redirectionUrl === "") {
-        return;
+      item.setAttribute("data-redirection-url", link ?? "");
+      if (!item.hasAttribute("data-click-attached")) {
+        item.addEventListener("click", () => {
+          const redirectionUrl = item.getAttribute("data-redirection-url") || "";
+          if (redirectionUrl === "") {
+            return;
+          }
+          window.open(redirectionUrl, "_blank");
+        });
+        item.setAttribute("data-click-attached", "true");
       }
-      window.open(redirectionUrl, "_blank");
-    });
-    item.setAttribute("data-click-attached", "true");
-  }
-  break;
+      return null;
 
     default:
       hoverDiv.textContent = "Default text content";
+      return hoverDiv;
   }
-
-  return hoverDiv;
 }
 

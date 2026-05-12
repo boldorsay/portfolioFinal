@@ -18,9 +18,10 @@ export function toggleOtherDivs(currentDiv, pointerEventValue) {
 
 
 export function deleteSwiper() {
-  if (swiper) {
+  if (swiper && !swiper.destroyed) {
     swiper.destroy(true, true); // Le premier paramètre supprime l'instance swiper, le second supprime tous les styles ajoutés par swiper
   }
+  swiper = null;
 
   // Supprimez les éléments DOM
   const swiperWrapper = document.querySelector(".swiper-wrapper");
@@ -32,7 +33,6 @@ export function deleteSwiper() {
     swiperPagination.removeChild(swiperPagination.firstChild);
   }
 }
-``;
 
 export function changeNameTitreContent(nameProject) {
   document.getElementById("titreProjectMenu").textContent = nameProject;
@@ -42,11 +42,12 @@ export function addContentWork(projectName) {
   const project = projectJSON.find((p) => p.nameProject === projectName);
   const swiperWrapper = document.querySelector(".swiper-wrapper");
 
-  // Clear existing slides and reset if Swiper is initialized
-  swiperWrapper.innerHTML = "";
   if (swiper && !swiper.destroyed) {
-    swiper.loopDestroy();
+    swiper.destroy(true, true);
   }
+  swiper = null;
+
+  swiperWrapper.innerHTML = "";
 
   Object.keys(project.content).forEach((key, index) => {
     const contentItem = project.content[key];
@@ -63,7 +64,6 @@ export function addContentWork(projectName) {
     swiperWrapper.appendChild(slide);
   });
 
-  // Update or initialize Swiper
   updateSwiper();
 }
 
@@ -74,7 +74,9 @@ function createSlide(key, url, backgroundColor, specialCondition, project) {
 
 
   slide.addEventListener("click", () => {
-    swiper.slideNext();
+    if (swiper && !swiper.destroyed) {
+      swiper.slideNext();
+    }
   });
 
   if (key.startsWith("image")) {
@@ -88,40 +90,50 @@ function createSlide(key, url, backgroundColor, specialCondition, project) {
     loadVideoWithLoader(url, slide, backgroundColor, project);
   }
   else if (key.startsWith("text")) {
-    // Créer un titre
+    slide.classList.add("swiper-slide--text");
     const textContainer = document.createElement("div");
-    textContainer.className = "slide-text-container"; 
+    textContainer.className = "slide-text-container";
 
     const title = document.createElement("h2");
-    title.className = "slide-title"; // Ajoutez une classe pour le style
-    title.textContent = " "; // Remplacez par votre titre
-  
-    // Créer un texte descriptif
-    const text = document.createElement("p");
-    text.className = "slide-text"; // Ajoutez une classe pour le style
-    text.innerHTML = 'Paul Dorsaz is a Swiss media & interaction designer living in Lausanne. He\'s freshly graduated from ECAL in 2023. He\'s actually working as independent at Workshop Studio<br><br><strong>Education</strong><br>2020 - 2023 Bachelor in Media & Interaction Design - ECAL<br>2018 - 2019 Dgital Junior at M&C SAATCHI <br>2013 - 2017 ERACOM (CFC) <br><br><strong>Social Media</strong><br><a href="https://www.instagram.com/paulnouvelhomme/" style="text-decoration: none; color: black;" onmouseover="this.style.color=\'blue\'" onmouseout="this.style.color=\'black\'">Instagram</a><br><a href="mailto:dorsazpaul@gmail.com" style="text-decoration: none; color: black;" onmouseover="this.style.color=\'blue\'" onmouseout="this.style.color=\'black\'">Mail</a>';
+    title.className = "slide-title";
+    const slideTitle =
+      typeof project.slideTitle === "string" ? project.slideTitle.trim() : "";
+    const fromHover = (project.hover?.titreName || "").trim();
+    title.textContent = slideTitle || fromHover || project.nameProject;
 
-  
-    // Ajouter le titre et le texte au slide
-    slide.appendChild(title);
-    slide.appendChild(text);
+    const textEl = document.createElement("div");
+    textEl.className = "slide-text";
+    textEl.innerHTML = typeof url === "string" ? url : "";
+
+    textContainer.appendChild(title);
+    textContainer.appendChild(textEl);
+    slide.appendChild(textContainer);
   }
   return slide;
 }
 
 function updateSwiper() {
   if (swiper && !swiper.destroyed) {
-    swiper.loopCreate();
-    swiper.update();
-  } else {
-    initializeSwiper();
+    swiper.destroy(true, true);
+    swiper = null;
   }
+  initializeSwiper();
 }
 
 function initializeSwiper() {
+  const slideCount = document.querySelectorAll(
+    ".swiper-wrapper > .swiper-slide"
+  ).length;
+  if (slideCount === 0) {
+    return;
+  }
+
+  /* Swiper loop exige assez de slides dupliqués ; avec 1–2 slides ça casse (warning + slideToLoop / resize). */
+  const enableLoop = slideCount >= 3;
+
   Swiper.use([Pagination]);
   swiper = new Swiper(".swiper-container", {
-    loop: true,
+    loop: enableLoop,
     pagination: {
       clickable: true,
       el: ".swiper-pagination",
@@ -129,11 +141,11 @@ function initializeSwiper() {
         `<span class="${className}">${index + 1}</span>`,
     },
     on: {
-      slideChange: function(swiper) {
-        let test =  document.querySelector(".div1")
-        test.style.zIndex = "100";
-      }
-    }
+      slideChange: function() {
+        const div1 = document.querySelector(".div1");
+        if (div1) div1.style.zIndex = "100";
+      },
+    },
   });
 }
 function loadVideoWithLoader(videoUrl, slideElement, backgroundColor, project) {
